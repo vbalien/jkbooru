@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import hashlib
-from flask import Flask, request
+from flask import Flask, request, render_template, redirect, url_for
 from flask.ext.sqlalchemy import SQLAlchemy
 from werkzeug import secure_filename
 from jkbooru.config.default_config import DefaultConfig
@@ -12,15 +12,30 @@ db = SQLAlchemy(app)
 from jkbooru.model.post import Post
 
 
-@app.route('/', defaults={'page': 1})
-@app.route('/post/<int:page>')
-def index(page):
-    return 'Hello World!' + str(page)
+@app.route('/', defaults={'page_idx': 1})
+@app.route('/posts/<int:page_idx>')
+def index(page_idx):
+    pagination = Post.query.paginate(page_idx, per_page=15, error_out=False)
+    return render_template('page.html', settings={
+        'title': app.config['JKBOORU_TITLE'],
+        'description': app.config['JKBOORU_DESCRIPTION']
+    }, page={
+        'next': pagination.next_num,
+        'prev': pagination.prev_num,
+        'current': pagination.page,
+        'total': pagination.pages,
+        'per_page': pagination.per_page,
+        'posts': pagination.items
+    })
 
 
 @app.route('/detail/<int:post_id>')
 def detail(post_id):
-    return 'Hello World!'
+    post = Post.query.filter(Post.id == post_id).first()
+    return render_template('detail.html', settings={
+        'title': app.config['JKBOORU_TITLE'],
+        'description': app.config['JKBOORU_DESCRIPTION']
+    }, post=post)
 
 
 @app.route('/upload', methods=['GET', 'POST'])
@@ -38,6 +53,9 @@ def upload_file():
             post = Post(filename=filename)
             db.session.add(post)
             db.session.commit()
-            return 'uploaded'
+            return redirect(url_for('detail', post_id=post.id))
     elif request.method == 'GET':
-        return 'get'
+        return render_template('upload.html', settings={
+            'title': app.config['JKBOORU_TITLE'],
+            'description': app.config['JKBOORU_DESCRIPTION']
+        })
