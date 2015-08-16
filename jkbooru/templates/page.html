@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+{% macro  page_item(post) -%}
+<a href="/detail/{{post.id}}"><img class="thumbnail" src="{{url_for('static', filename='images/'+post.filename)}}"/></a>
+{%- endmacro %}
+
+{% block content %}
+  {% for post in page.posts %}
+    {{ page_item(post) }}
+  {% endfor %}
+{% endblock %}

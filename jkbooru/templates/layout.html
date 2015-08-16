@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{{ settings.title }}</title>
+    <meta name="description" content="{{ settings.description }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="head">
+        <div class="content">
+          <a class="logo" href="/">{{ settings.title }}</a>
+          {% if request.path != '/upload' %}<a class="upload" href="/upload">Upload</a>{% endif %}
+        </div>
+      </div>
+        <div class="body">
+          <div class="content">{% block content %}{% endblock %}</div>
+        </div>
+    </div>
+    {% block footer %}{% endblock %}
+  </body>
+</html>

@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% block content %}
+<form id="uploadForm" enctype="multipart/form-data" action="/upload" method="post">
+  <div class="center">
+    <img id="thumbnail" class="thumbnail"/><br/>
+    <input type="text" id="filename" class="text" />
+    <div class="fileUpload upload">
+        <span>Select</span>
+        <input type="file" id="upload" name="file" class="upload" />
+    </div>
+    <hr/>
+    <input class="upload" type="submit" value="Upload" />
+  </div>
+</form>
+{% endblock %}
+
+{% block footer %}
+<script type="text/javascript">
+document.getElementById("upload").onchange = function () {
+  document.getElementById("filename").value = this.value;
+  var file = this.files[0];
+  var fr = new FileReader();
+  var img = fr.readAsDataURL(file);
+  fr.onloadend = function() {
+    var img = fr.result;
+    document.getElementById("thumbnail").src = img;
+  }
+};
+</script>
+{% endblock %}

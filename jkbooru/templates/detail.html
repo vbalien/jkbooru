@@ -1,0 +1,6 @@
+{% extends 'layout.html' %}
+{% block content %}
+<a href="{{url_for('static', filename='images/'+post.filename)}}">
+  <img width="100%" src="{{url_for('static', filename='images/'+post.filename)}}"/>
+</a>
+{% endblock %}
