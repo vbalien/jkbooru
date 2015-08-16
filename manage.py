@@ -10,7 +10,6 @@ manager = Manager(app)
 
 class Debug(Command):
     def run(self):
-        print("run")
         app.run(host='0.0.0.0', port=80, debug=True)
 
 
