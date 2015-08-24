@@ -44,9 +44,9 @@ def upload_file():
         file = request.files['file']
         if file is not None:
             filename_ext = secure_filename(file.filename).rsplit('.', 1)
-            filename = filename_ext[0].encode('utf-8')
-            filename = hashlib.sha224(filename).hexdigest()
-            filename += '.' + filename_ext[1]
+            filename = hashlib.sha224(filename_ext[0].encode('utf-8'))
+            filename = filename.hexdigest() + '.' + filename_ext[1]
+
             path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(path)
 
