@@ -14,6 +14,7 @@ hr {width: 100%;border: none; height: 1px; background-color: #888;}
 .head>.content>.upload {margin-top: 5px; float: right;}
 .body {width: 100%; padding-top: 60px;}
 .content { width: 1024px; margin: 0 auto; padding: 0 10px;}
+.body>.content {text-align: center;}
 .center { text-align: center;}
 .logo { float: left; color: #444; font-size: 24pt; margin-top: 5px;}
 .upload { display: inline; font-size: 16pt; color: #ddd; text-shadow: 1px 1px #444; transition: color 0.2s; padding: 5px; border: 1px solid #8987b8; border-radius: 5px; background: linear-gradient(#8987b8, #5d5a98);}
