@@ -12,4 +12,4 @@ class Post(db.Model):
         self.filename = filename
 
     def __repr__(self):
-        return '<Post %r>' % self.path
+        return '<Post %r>' % self.filename
