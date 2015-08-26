@@ -13,3 +13,10 @@ class Post(db.Model):
 
     def __repr__(self):
         return '<Post %r>' % self.filename
+
+    @property
+    def serialize(self):
+        return {
+            'id': self.id,
+            'filename': self.filename
+        }

@@ -2,6 +2,7 @@
 import os
 import hashlib
 from flask import Flask, request, render_template, redirect, url_for
+from flask_restful import Api
 from flask.ext.sqlalchemy import SQLAlchemy
 from werkzeug import secure_filename
 from jkbooru.config.default_config import DefaultConfig
@@ -9,23 +10,18 @@ from jkbooru.config.default_config import DefaultConfig
 app = Flask(__name__)
 app.config.from_object(DefaultConfig)
 db = SQLAlchemy(app)
+api = Api(app)
+
 from jkbooru.model.post import Post
+from jkbooru.restful.pagination import Pagination
+api.add_resource(Pagination, '/posts.json')
 
 
-@app.route('/', defaults={'page_idx': 1})
-@app.route('/posts/<int:page_idx>')
-def index(page_idx):
-    pagination = Post.query.paginate(page_idx, per_page=15, error_out=False)
+@app.route('/')
+def index():
     return render_template('page.html', settings={
         'title': app.config['JKBOORU_TITLE'],
         'description': app.config['JKBOORU_DESCRIPTION']
-    }, page={
-        'next': pagination.next_num,
-        'prev': pagination.prev_num,
-        'current': pagination.page,
-        'total': pagination.pages,
-        'per_page': pagination.per_page,
-        'posts': pagination.items
     })
 
 
