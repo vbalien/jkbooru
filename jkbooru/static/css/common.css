@@ -17,8 +17,8 @@ hr {width: 100%;border: none; height: 1px; background-color: #888;}
 .body>.content {text-align: center;}
 .center { text-align: center;}
 .logo { float: left; color: #444; font-size: 24pt; margin-top: 5px;}
-.upload { display: inline; font-size: 16pt; color: #ddd; text-shadow: 1px 1px #444; transition: color 0.2s; padding: 5px; border: 1px solid #8987b8; border-radius: 5px; background: linear-gradient(#8987b8, #5d5a98);}
-.upload:hover { color: #fff}
+.upload, .button { display: inline; font-size: 16pt; color: #ddd; text-shadow: 1px 1px #444; transition: color 0.2s; padding: 5px; border: 1px solid #8987b8; border-radius: 5px; background: linear-gradient(#8987b8, #5d5a98);}
+.upload:hover, .button:hover { color: #fff}
 .text {width: 300px; font-size: 16pt; border: 1px solid #8987b8; border-radius: 5px; padding: 5px;}
 .thumbnail { background-color: #fff; height: 100px; box-shadow: 0 0 10px #666; margin: 10px;}
 
