@@ -3,6 +3,7 @@
 from flask.ext.script import Command, Manager
 from flask.ext.migrate import Migrate, MigrateCommand
 from jkbooru import app, db
+from crawl import CrawlCommand
 
 migrate = Migrate(app, db)
 manager = Manager(app)
@@ -20,4 +21,5 @@ class Run(Command):
 manager.add_command('debug', Debug)
 manager.add_command('run', Run)
 manager.add_command('db', MigrateCommand)
+manager.add_command('crawl', CrawlCommand)
 manager.run()
