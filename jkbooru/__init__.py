@@ -34,6 +34,16 @@ def detail(post_id):
     }, post=post)
 
 
+@app.route('/detail/<int:post_id>/delete')
+def delete(post_id):
+    post = Post.query.filter(Post.id == post_id).first()
+    path = os.path.join(app.config['UPLOAD_FOLDER'], post.filename)
+    os.remove(path)
+    db.session.delete(post)
+    db.session.commit()
+    return redirect(url_for('index'))
+
+
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':

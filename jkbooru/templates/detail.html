@@ -3,4 +3,7 @@
 <a href="{{url_for('static', filename='images/'+post.filename)}}">
   <img width="100%" src="{{url_for('static', filename='images/'+post.filename)}}"/>
 </a>
+<p>
+  <a class="button" href="/detail/{{post.id}}/delete">delete</a>
+</p>
 {% endblock %}
